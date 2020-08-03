@@ -44,6 +44,10 @@ public class Page<T> {
         return size;
     }
 
+    public int getTotalPages() {
+        return totalPages;
+    }
+
     public <N> Page<N> map(Function<T, N> mapper) {
         return new Page(this.content.stream().map(mapper).collect(Collectors.toList()), totalPages, hasNext, page, size);
     }

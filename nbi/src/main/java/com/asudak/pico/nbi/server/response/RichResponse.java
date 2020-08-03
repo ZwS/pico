@@ -1,6 +1,7 @@
 package com.asudak.pico.nbi.server.response;
 
-import java.util.Collection;
+import com.asudak.pico.db.model.page.Page;
+
 import java.util.List;
 
 public abstract class RichResponse {
@@ -17,6 +18,10 @@ public abstract class RichResponse {
 
     public static RichResponse success(String message) {
         return new MessageResponse(Status.SUCCESS, message);
+    }
+
+    public static <T> RichResponse success(Page<T> data) {
+        return new PageResponse<>(data);
     }
 
     public static RichResponse success(Object data) {

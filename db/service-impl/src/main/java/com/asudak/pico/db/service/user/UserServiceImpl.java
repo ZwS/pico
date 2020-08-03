@@ -28,13 +28,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserDTO> getUsers(Integer page) {
-        return userRepository.findPage(PageRequest.of(page, configuration.getPageSize()))
+        return userRepository.findUsers(PageRequest.of(page, configuration.getPageSize()))
                 .map(userMapper::toDTO);
     }
 
     @Override
     public UserDTO getUser(String id) {
-        return userRepository.findOne(UUID.fromString(id))
+        return userRepository.findUserById(UUID.fromString(id))
                 .map(userMapper::toDTO)
                 .orElseThrow(() -> new NotFoundException(UserDTO.class, id));
     }

@@ -24,7 +24,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 import static java.util.function.Predicate.not;
 
@@ -32,7 +31,7 @@ import static java.util.function.Predicate.not;
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserNbiService {
+public class UserEndpoint {
 
     @Inject
     @RestClient

@@ -1,6 +1,6 @@
 package com.asudak.pico.nbi.server.error;
 
-import com.asudak.pico.nbi.exception.ApplicationException;
+import com.asudak.pico.core.exception.ApplicationException;
 import com.asudak.pico.nbi.server.response.JaxrsResponse;
 
 import javax.inject.Inject;

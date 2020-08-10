@@ -1,6 +1,6 @@
 package com.asudak.pico.nbi.client.exception;
 
-import com.asudak.pico.nbi.exception.ApplicationException;
+import com.asudak.pico.core.exception.ApplicationException;
 
 public class ClientException extends ApplicationException {
 

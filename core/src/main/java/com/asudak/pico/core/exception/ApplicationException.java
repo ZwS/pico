@@ -1,4 +1,4 @@
-package com.asudak.pico.nbi.exception;
+package com.asudak.pico.core.exception;
 
 public class ApplicationException extends RuntimeException {
 

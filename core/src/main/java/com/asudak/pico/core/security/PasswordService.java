@@ -1,5 +1,7 @@
 package com.asudak.pico.core.security;
 
+import com.asudak.pico.core.exception.ApplicationException;
+
 import javax.inject.Singleton;
 import javax.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +17,7 @@ public class PasswordService {
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 is not supported.", e);
+            throw new ApplicationException("SHA-256 is not supported.", e);
         }
 
         byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));

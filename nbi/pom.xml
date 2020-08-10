@@ -35,10 +35,6 @@
             <groupId>com.asudak.pico</groupId>
             <artifactId>core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.asudak.pico</groupId>
-            <artifactId>core</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

@@ -47,7 +47,7 @@ public class JaxrsResponse {
 
     public static Response constraintViolation(Collection<ValidationResponse.Violation> violations) {
         return Response.serverError()
-                .entity(RichResponse.constraintViolation(violations))
+                .entity(RichResponse.constraintViolation(List.copyOf(violations)))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }

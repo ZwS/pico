@@ -1,4 +1,4 @@
-package com.asudak.pico.nbi.client.db.user;
+package com.asudak.pico.nbi.client.db;
 
 import com.asudak.pico.nbi.client.exception.ClientException;
 import com.asudak.pico.nbi.client.exception.NotFoundClientException;
@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class UserResponseMapper implements ResponseExceptionMapper<ClientException> {
+public class DbResponseMapper implements ResponseExceptionMapper<ClientException> {
 
     @Override
     public ClientException toThrowable(Response response) {

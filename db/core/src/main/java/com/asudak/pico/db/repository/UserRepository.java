@@ -2,6 +2,7 @@ package com.asudak.pico.db.repository;
 
 import com.asudak.pico.db.entity.User;
 import com.asudak.pico.db.entity.User_;
+import com.asudak.pico.db.model.UserDTO;
 import com.asudak.pico.db.model.page.Page;
 import com.asudak.pico.db.model.page.PageRequest;
 
@@ -52,9 +53,25 @@ public class UserRepository {
         return Optional.ofNullable(em.find(User.class, id));
     }
 
+    public Optional<User> findUserByUsername(String username) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<User> query = cb.createQuery(User.class);
+        Root<User> user = query.from(User.class);
+
+        query
+                .select(user)
+                .where(cb.equal(user.get(User_.USERNAME), username));
+
+        try {
+            return Optional.of(em.createQuery(query).getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
     public UUID save(@NotNull User user) {
         return Optional.ofNullable(user.getId()).map(id -> em.find(User.class, id))
-                .map(entity -> em.merge(entity))
+                .map(em::merge)
                 .orElseGet(() -> {
                     em.persist(user);
                     return user;

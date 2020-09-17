@@ -33,9 +33,12 @@ import static java.util.function.Predicate.not;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserEndpoint {
 
+    private final UserServiceClient userService;
+
     @Inject
-    @RestClient
-    private UserServiceClient userService;
+    public UserEndpoint(@RestClient UserServiceClient userService) {
+        this.userService = userService;
+    }
 
     @GET
     public Response getUsers(@QueryParam("page") @DefaultValue("1") int page) {

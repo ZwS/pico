@@ -7,7 +7,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +27,11 @@ public class User {
     @Column(nullable = false)
     @Basic(fetch = FetchType.LAZY)
     private String passwordHash;
+    @ManyToMany
+    @JoinTable(name = "USER_ROLES")
+    private Set<Role> roles = new LinkedHashSet<>();
+    @OneToMany(orphanRemoval = true)
+    private Set<AccessToken> accessTokens;
 
     public UUID getId() {
         return id;
@@ -45,5 +55,21 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<AccessToken> getAccessTokens() {
+        return accessTokens;
+    }
+
+    public void setAccessTokens(Set<AccessToken> accessTokens) {
+        this.accessTokens = accessTokens;
     }
 }

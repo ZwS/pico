@@ -3,6 +3,7 @@ package com.asudak.pico.db.mapper;
 import com.asudak.pico.core.config.MapperConfiguration;
 import com.asudak.pico.db.entity.User;
 import com.asudak.pico.db.model.UserDTO;
+import com.asudak.pico.db.model.UserDetailsDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
@@ -10,6 +11,8 @@ import org.mapstruct.MappingTarget;
 public interface UserMapper {
 
     UserDTO toDTO(User user);
+
+    UserDetailsDTO toDetailsDTO(User user);
 
     User toEntity(UserDTO user);
 

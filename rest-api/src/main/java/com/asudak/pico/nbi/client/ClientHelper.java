@@ -11,6 +11,10 @@ public class ClientHelper {
     private ClientHelper() {
     }
 
+    public static <T> Optional<T> withoutHandlingErrors(Supplier<T> apiCall) {
+        return Try.of(apiCall).asOptional();
+    }
+
     public static <T> Optional<T> handlingNotFound(Supplier<T> apiCall) {
         return Try.of(apiCall)
                 .handle(NotFoundClientException.class, e -> null)

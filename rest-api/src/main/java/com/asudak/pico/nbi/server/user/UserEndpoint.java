@@ -1,10 +1,8 @@
 package com.asudak.pico.nbi.server.user;
 
-import com.asudak.pico.core.util.Try;
 import com.asudak.pico.db.model.page.Page;
 import com.asudak.pico.nbi.server.response.JaxrsResponse;
 import com.asudak.pico.nbi.client.db.user.UserServiceClient;
-import com.asudak.pico.nbi.client.exception.NotFoundClientException;
 import com.asudak.pico.nbi.server.user.model.CreateUserRequest;
 import com.asudak.pico.nbi.server.user.model.UpdatePasswordRequest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -25,6 +23,8 @@ import javax.ws.rs.core.MediaType;
 
 import javax.ws.rs.core.Response;
 
+import static com.asudak.pico.nbi.client.ClientHelper.handlingNotFound;
+import static com.asudak.pico.nbi.client.ClientHelper.withoutHandlingErrors;
 import static java.util.function.Predicate.not;
 
 @Named
@@ -42,8 +42,7 @@ public class UserEndpoint {
 
     @GET
     public Response getUsers(@QueryParam("page") @DefaultValue("1") int page) {
-        return Try.of(() -> userService.getUsers(page))
-                .asOptional()
+        return withoutHandlingErrors(() -> userService.getUsers(page))
                 .filter(not(Page::isEmpty))
                 .map(JaxrsResponse::ok)
                 .orElseGet(JaxrsResponse::noContent);
@@ -53,9 +52,7 @@ public class UserEndpoint {
     @GET
     @Path("/{id}")
     public Response getUser(@PathParam("id") String id) {
-        return Try.of(() -> userService.getUser(id))
-                .handle(NotFoundClientException.class, e -> null)
-                .asOptional()
+        return handlingNotFound(() -> userService.getUser(id))
                 .map(JaxrsResponse::ok)
                 .orElseGet(() -> JaxrsResponse.notFound(id));
     }

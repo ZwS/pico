@@ -13,4 +13,8 @@ public class RefreshTokenRequest {
     public RefreshTokenRequest(@JsonbProperty("refreshToken") String refreshToken) {
         this.refreshToken = refreshToken;
     }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
 }

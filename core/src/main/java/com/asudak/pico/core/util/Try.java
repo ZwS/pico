@@ -28,9 +28,9 @@ public class Try<T> {
         return result.left()
                 .filter(exception::isInstance)
                 .map(exception::cast)
-                .map(handler::apply)
-                .map(Either::right)
-                .map(Try<T>::new)
+                .map(handler)
+                .<Either<Exception, T>>map(Either::right)
+                .map(Try::new)
                 .orElse(this);
     }
 

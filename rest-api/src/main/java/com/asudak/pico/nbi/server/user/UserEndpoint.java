@@ -1,13 +1,12 @@
 package com.asudak.pico.nbi.server.user;
 
 import com.asudak.pico.db.model.page.Page;
+import com.asudak.pico.db.service.user.UserService;
 import com.asudak.pico.nbi.server.response.JaxrsResponse;
-import com.asudak.pico.nbi.client.db.user.UserServiceClient;
 import com.asudak.pico.nbi.server.user.model.CreateUserRequest;
 import com.asudak.pico.nbi.server.user.model.UpdatePasswordRequest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -33,12 +32,8 @@ import static java.util.function.Predicate.not;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserEndpoint {
 
-    private final UserServiceClient userService;
-
-    @Inject
-    public UserEndpoint(@RestClient UserServiceClient userService) {
-        this.userService = userService;
-    }
+    @RestClient
+    UserService userService;
 
     @GET
     public Response getUsers(@QueryParam("page") @DefaultValue("1") int page) {

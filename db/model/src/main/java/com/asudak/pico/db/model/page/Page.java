@@ -49,14 +49,14 @@ public class Page<T> {
     }
 
     public <N> Page<N> map(Function<T, N> mapper) {
-        return new Page(this.content.stream().map(mapper).collect(Collectors.toList()), totalPages, hasNext, page, size);
+        return new Page<>(this.content.stream().map(mapper).collect(Collectors.toList()), totalPages, hasNext, page, size);
     }
 
-    public static <T> Page of(List<T> content, int totalPages, boolean hasNext, PageRequest request) {
-        return new Page(content, totalPages, hasNext, request.getPage(), request.getPageSize());
+    public static <T> Page<T> of(List<T> content, int totalPages, boolean hasNext, PageRequest request) {
+        return new Page<>(content, totalPages, hasNext, request.getPage(), request.getPageSize());
     }
 
-    public static Page empty(PageRequest request) {
-        return new Page(Collections.emptyList(), request.getPage(), false, request.getPage(), request.getPageSize());
+    public static <T> Page<T> empty(PageRequest request) {
+        return new Page<>(Collections.emptyList(), request.getPage(), false, request.getPage(), request.getPageSize());
     }
 }

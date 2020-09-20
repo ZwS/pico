@@ -10,7 +10,7 @@ public class DbConfiguration {
 
     @Inject
     @ConfigProperty(name = "pico.db.page.size")
-    private int pageSize;
+    int pageSize;
 
     public int getPageSize() {
         return pageSize;

@@ -30,8 +30,6 @@ public class User {
     @ManyToMany
     @JoinTable(name = "USER_ROLES")
     private Set<Role> roles = new LinkedHashSet<>();
-    @OneToMany(orphanRemoval = true)
-    private Set<AccessToken> accessTokens;
 
     public UUID getId() {
         return id;
@@ -63,13 +61,5 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public Set<AccessToken> getAccessTokens() {
-        return accessTokens;
-    }
-
-    public void setAccessTokens(Set<AccessToken> accessTokens) {
-        this.accessTokens = accessTokens;
     }
 }

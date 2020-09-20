@@ -9,12 +9,10 @@ import com.asudak.pico.db.model.page.PageRequest;
 import com.asudak.pico.db.repository.UserRepository;
 import com.asudak.pico.db.service.NotFoundException;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Objects;
 import java.util.UUID;
 
-@Stateless
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;

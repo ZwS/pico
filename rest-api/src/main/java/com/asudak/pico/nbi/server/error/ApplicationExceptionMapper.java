@@ -13,12 +13,9 @@ import java.util.logging.Logger;
 @Provider
 public class ApplicationExceptionMapper implements ExceptionMapper<ApplicationException> {
 
-    private final Logger logger;
-
+    // FIXME find out how to properly inject from other jar
     @Inject
-    public ApplicationExceptionMapper(Logger logger) {
-        this.logger = logger;
-    }
+    Logger logger;
 
     @Override
     public Response toResponse(ApplicationException exception) {

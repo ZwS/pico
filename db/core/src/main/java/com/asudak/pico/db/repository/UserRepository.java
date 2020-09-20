@@ -2,11 +2,10 @@ package com.asudak.pico.db.repository;
 
 import com.asudak.pico.db.entity.User;
 import com.asudak.pico.db.entity.User_;
-import com.asudak.pico.db.model.UserDTO;
 import com.asudak.pico.db.model.page.Page;
 import com.asudak.pico.db.model.page.PageRequest;
 
-import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -21,15 +20,11 @@ import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
 
-@Singleton
+@ApplicationScoped
 public class UserRepository {
 
-    private final EntityManager em;
-
     @Inject
-    public UserRepository(EntityManager em) {
-        this.em = em;
-    }
+    EntityManager em;
 
     public Page<User> findUsers(@NotNull PageRequest request) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

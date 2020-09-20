@@ -5,7 +5,7 @@ import org.immutables.value.Value;
 import java.util.Set;
 
 @Value.Immutable
-public abstract class UserDetailsDTO extends UserDTO {
+public abstract class UserDetailsDTO extends BaseUserDTO {
 
     public abstract Set<RoleDTO> getRoles();
 }

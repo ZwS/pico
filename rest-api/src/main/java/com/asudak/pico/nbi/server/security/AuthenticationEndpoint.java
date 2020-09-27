@@ -3,10 +3,10 @@ package com.asudak.pico.nbi.server.security;
 import com.asudak.pico.db.service.user.UserService;
 import com.asudak.pico.nbi.server.response.JaxrsResponse;
 import com.asudak.pico.nbi.server.security.model.GenerateTokenRequest;
-import com.asudak.pico.nbi.server.security.model.RefreshTokenRequest;
 import com.asudak.pico.nbi.server.security.model.TokenResponse;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import javax.annotation.security.PermitAll;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -31,23 +31,12 @@ public class AuthenticationEndpoint {
     UserService userService;
 
     @POST
+    @PermitAll
     public Response generateToken(@Valid GenerateTokenRequest request) {
         return handlingNotFound(() -> userService.getUser(request.getUsername(), request.getPassword()))
                 .map(jwtService::generateToken)
-                .map(TokenResponse::of)
+                .map(TokenResponse::new)
                 .map(JaxrsResponse::ok)
                 .orElseGet(JaxrsResponse::unauthorized);
-    }
-
-    @POST
-    @Path("/refresh")
-    public Response refreshToken(@Valid RefreshTokenRequest refreshTokenRequest) {
-        return Response.noContent().build();
-    }
-
-    @POST
-    @Path("/invalidate")
-    public Response invalidate() {
-        return Response.noContent().build();
     }
 }

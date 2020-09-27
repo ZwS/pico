@@ -1,15 +1,22 @@
 package com.asudak.pico.nbi.server.response;
 
-public class ObjectResponse extends RichResponse {
+import javax.json.bind.annotation.JsonbCreator;
+import javax.json.bind.annotation.JsonbProperty;
 
-    private final Object data;
+public class ObjectResponse<T> extends RichResponse {
 
-    public ObjectResponse(Status status, Object data) {
+    private final T data;
+
+    @JsonbCreator
+    public ObjectResponse(
+            @JsonbProperty("status") Status status,
+            @JsonbProperty("data") T data
+    ) {
         super(status);
         this.data = data;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 }
